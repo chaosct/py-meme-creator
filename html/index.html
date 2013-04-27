@@ -1,13 +1,23 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Creador Memes Pirates</title>
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
 <body>
-	<h1>Memes Possibles</h1>
-	<ul>
-		%for pic in pics:
-			<li><a href=${"/Text1/Text2/"+pic}>${pic}</a></li>
-		%endfor
-	</ul>
+	<div class="container">
+		<h1>Memes Possibles</h1>
+		<div class="row">
+			%for pic in pics:
+			<div class="span3">
+				<a href=${"/Text1/Text2/"+pic}>
+					<img src=${"/Text1/Text2/"+pic} alt="$pic" class="img-rounded">
+					${pic}
+				</a>
+			</div>
+			%endfor
+		</div>
+	</div>
+	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
