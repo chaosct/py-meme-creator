@@ -3,9 +3,9 @@ from unipath import Path, FILES
 from mako.template import Template
 from urllib import unquote
 from hashlib import md5
-from wand.image import Image
 import subprocess
 from cherrypy.lib.static import serve_file
+from PIL import Image
 
 class MemeCreator:
     def __init__(self, convertcmd="convert"):
@@ -41,8 +41,8 @@ class MemeCreator:
         m = md5('/'.join([text1, text2, picfile])).hexdigest()
         target = self.renderdir.child(picfilename,m)
         if not target.exists():
-            with Image(filename=picfile) as img:
-                width = img.width
+            img = Image.open(picfile)
+            width = img.size[1]
             target.parent.mkdir(parents=True)
             self.convert(width, text1, picfile, 'north', target)
             self.convert(width, text2, target, 'south', target)
