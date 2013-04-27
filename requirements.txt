@@ -1,0 +1,8 @@
+CherryPy==3.2.4
+Mako==0.8.0
+MarkupSafe==0.15
+Unipath==1.0
+Wand==0.2.3
+argparse==1.2.1
+distribute==0.6.24
+wsgiref==0.1.2
