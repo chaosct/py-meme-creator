@@ -8,7 +8,7 @@ import subprocess
 from cherrypy.lib.static import serve_file
 
 class MemeCreator:
-    def __init__(self):
+    def __init__(self, convertcmd="convert"):
         self.picsdir = Path().absolute()+'/images'
         self.renderdir = Path().absolute()+'/render'
         if not self.renderdir.exists():
@@ -16,6 +16,7 @@ class MemeCreator:
         ftemplate = str(Path().absolute()+'/html/index.html')
         self.templateindex = Template(filename=ftemplate)
         self.fontpath = Path().absolute()+'/impact.ttf'
+        self.convertcmd = convertcmd
 
     def index(self):
         pics = self.picsdir.listdir(filter=FILES)
@@ -49,7 +50,7 @@ class MemeCreator:
 
     def convert(self, width, text, source, location, destination):
         fontpath = self.fontpath
-        subprocess.call(["convert",
+        subprocess.call([self.convertcmd,
                             "-fill", "white",
                             "-stroke", "black",
                             "-strokewidth", "2",
