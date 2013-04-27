@@ -28,7 +28,11 @@ class MemeCreator:
 
     def default(self, *args, **kwargs):
         URL = cherrypy.url(qs=cherrypy.request.query_string)
-        text1, text2, picfilename = unquote(URL[len(cherrypy.request.base+'/'):]).split('/')
+        try:
+            text1, text2, picfilename = unquote(URL[len(cherrypy.request.base+'/'):]).split('/')
+        except ValueError:
+            cherrypy.response.status = 500
+            return self.serve_meme("500", "Arr! No t'entenc, pirata!", "piratecat1.jpg")
         return self.serve_meme(text1, text2, picfilename)
 
     def serve_meme(self, text1, text2, picfilename):
