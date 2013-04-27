@@ -11,6 +11,8 @@ class MemeCreator:
     def __init__(self):
         self.picsdir = Path().absolute()+'/images'
         self.renderdir = Path().absolute()+'/render'
+        if not self.renderdir.exists():
+            self.renderdir.mkdir()
         ftemplate = str(Path().absolute()+'/html/index.html')
         self.templateindex = Template(filename=ftemplate)
         self.fontpath = Path().absolute()+'/impact.ttf'
