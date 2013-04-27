@@ -9,13 +9,14 @@ from PIL import Image
 
 class MemeCreator:
     def __init__(self, convertcmd="convert"):
-        self.picsdir = Path().absolute()+'/images'
-        self.renderdir = Path().absolute()+'/render'
+        thisdir = Path( __file__ ).parent.absolute()
+        self.picsdir = thisdir+'/images'
+        self.renderdir = thisdir+'/render'
         if not self.renderdir.exists():
             self.renderdir.mkdir()
-        ftemplate = str(Path().absolute()+'/html/index.html')
+        ftemplate = str(thisdir+'/html/index.html')
         self.templateindex = Template(filename=ftemplate)
-        self.fontpath = Path().absolute()+'/impact.ttf'
+        self.fontpath = thisdir+'/impact.ttf'
         self.convertcmd = convertcmd
 
     def index(self):
